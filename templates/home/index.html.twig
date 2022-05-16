@@ -1,0 +1,198 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+            body {
+                background-image : url({{ asset('images/back2.png') }} ) !important; 
+                background-position : center center;
+                background-repeat : no-repeat;
+                background-attachment : fixed;
+                background-size : cover;
+            }
+            .login-back-left {
+                background:#ffffff00 !important;
+            }
+    </style>
+    
+    {{ include ('inc/navbar.html.twig') }}   
+    {# <div class="card m-3 mt-4 shadow">
+        <div class="card-header font-weight-bold">
+            Reception
+        </div>
+        <div class="card-body">
+            <div class="home-table">
+                <!-- Table -->
+                <table id='pdossier' class='display dataTable table table-bordered'>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Code</th>
+                        <th>Nom</th>
+                        <th>Abreviation</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    
+                </table>
+            </div>
+        </div>
+    </div> #}
+
+
+<div class="row m-3 mt-5">
+    <div class="col-sm-3 ">
+        <a href="{{ path('reception') }}">
+            <div class="card bg-dark text-white text-center shadow">
+                <div class="card-body">
+                    <div class="mb-2">
+                    <img class="icon-gestion" src="{{asset('images/computer.png')}}" width="100px"> </img>
+                    </div>
+                    Reception
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-sm-3 ">
+        <a href="{{ path('vente_new') }}">
+            <div class="card bg-dark text-white text-center shadow">
+                <div class="card-body">
+                    <div class="mb-2">
+                    <img class="icon-gestion" src="{{asset('images/sale.png')}}" width="100px"> </img>
+                    </div>
+                    Gestion Ventes
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-sm-3 ">
+        <div class="card bg-dark text-white text-center shadow">
+            <div class="card-body">
+                <div class="mb-2">
+                <img class="icon-gestion" src="{{asset('images/pie-chart.png')}}" width="100px"> </img>
+                </div>
+                Statistique
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3 ">
+       <a href="{{ path('p_produit_index') }}">
+            <div class="card bg-dark text-white text-center shadow">
+                <div class="card-body">
+                    <div class="mb-2">
+                    <img class="icon-gestion" src="{{asset('images/packages.png')}}" width="100px"> </img>
+                    </div>
+                    Gestion Stock
+                </div>
+            </div>
+        </a>
+    </div>
+
+    
+    {# <div class="col-sm-3 mt-4">
+        <div class="card bg-dark text-white text-center shadow">
+            <div class="card-body">
+                <div class="mb-2">
+                <img class="icon-gestion" src="{{asset('images/folder.png')}}" width="100px"> </img>
+                </div>
+                Gestion Dossiers
+            </div>
+        </div>
+    </div> #}
+    
+    </div>
+
+    {# ---- Parametrage ----- #}
+
+    <div class="row m-3 mt-5">
+    <div class="col-sm-3 ">
+        <a href="{{ path('p_article_index') }}">
+            <div class="card bg-dark text-white text-center shadow">
+                <div class="card-body">
+                    <div class="mb-2">
+                    <img class="icon-gestion" src="{{asset('images/box.png')}}" width="100px"> </img>
+                    </div>
+                    Gestion Articles
+                </div>
+            </div>
+        </a>
+    </div>
+
+    {# {% if is_granted('ROLE_ADMIN') %}
+        <div class="col-sm-3 ">
+            <a href="#">
+                <div class="card bg-dark text-white text-center shadow">
+                    <div class="card-body">
+                        <div class="mb-2">
+                        <img class="icon-gestion" src="{{asset('images/group.png')}}" width="100px"> </img>
+                        </div>
+                        Gestion Users
+                    </div>
+                </div>
+            </a>
+        </div>        
+    {% endif %} #}
+
+    <div class="col-sm-3 ">
+        <a href="{{ path('p_client_index') }}">
+            <div class="card bg-dark text-white text-center shadow">
+                <div class="card-body">
+                    <div class="mb-2">
+                    <img class="icon-gestion" src="{{asset('images/consumer.png')}}" width="100px"> </img>
+                    </div>
+                    Gestion Clients
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-sm-3 ">
+        <a href="{{ path('p_fornisseur_index') }}">
+            <div class="card bg-dark text-white text-center shadow">
+                <div class="card-body">
+                    <div class="mb-2">
+                    <img class="icon-gestion" src="{{asset('images/fundraiser.png')}}" width="100px"> </img>
+                    </div>
+                    Gestion Fournisseurs
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+    <div class="col-sm-3 ">
+        <a href="{{ path('synchroniser') }}">
+            <div class="card bg-dark text-white text-center shadow">
+                <div class="card-body">
+                    <div class="mb-2">
+                            <img class="icon-gestion" src="{{asset('images/sync.png')}}" width="100px"> </img>
+                    </div>
+                    Synchronisation
+                </div>
+            </div>
+        </a>
+    </div>   
+
+    
+    {# <div class="col-sm-3 mt-4">
+        <div class="card bg-dark text-white text-center shadow">
+            <div class="card-body">
+                <div class="mb-2">
+                <img class="icon-gestion" src="{{asset('images/folder.png')}}" width="100px"> </img>
+                </div>
+                Gestion Dossiers
+            </div>
+        </div>
+    </div> #}
+    
+    </div>
+
+        {# <button class="test"> Test </button> #}
+        
+{% endblock %}

@@ -1,0 +1,37 @@
+<div class="flex-container">
+    <div class="col-sm-12 col-md-6">
+        <div class="card shadow">
+            <div class="card-header">
+                <span class="font-weight-bold">{{ card_header|default('Ajouter article') }}</span>
+                <a class="float-right text-info" href="{{ path('p_article_index')  }}">
+                       <i class="fas fa-arrow-left mr-1"></i>
+                        Retourner à la liste
+                </a>
+            </div>
+            
+            <div class="card-body">
+
+                {{ form_start(form) }}
+                    {# {{ form_widget(form) }} #}
+
+                    <div class="form-group">
+                            <label for="designation">Designation</label>
+                            {{ form_widget(form.designation, {'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.designation) }}
+                    </div>
+
+                    <div class="form-group">
+                            <label for="abreviation">Abreviation</label>
+                            {{ form_widget(form.abreviation, {'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.abreviation) }}
+                    </div>
+
+                    <button class="btn btn-dark float-right btn-sm" class="btn">{{ button_label|default('Ajouter') }}</button>
+                {{ form_end(form) }}
+
+             </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PArticle index{% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+        body {
+            background-image: url({{ asset('images/back2.png') }} ) !important; 
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .login-back-left {
+            background:#ffffff00 !important;
+        }
+    </style>
+    
+    {{ include ('inc/navbar.html.twig') }} 
+
+    {# <h1>PArticle index</h1> #}
+    
+    <div class="card m-3 mt-4 shadow">
+        <div class="card-header font-weight-bold">
+            Clients
+            <a class="btn btn-dark float-right  btn-sm" href="{{ path('p_article_new') }}"> 
+                <i class="fas fa-plus mr-1" ></i>
+                Ajouter article 
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="home-table">
+                <!-- Table -->
+                <table id='particle' class='display dataTable table table-bordered'>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Designation</th>
+                            <th>Abreviation</th>
+                            <th>DateCreation</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                </table>
+                </div>
+        </div>
+    </div>
+
+    {# <a href="{{ path('p_article_new') }}">Create new</a> #}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $('#particle').DataTable({
+
+                // 'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'/p/article/article_data'
+                },
+                'columns': [
+                    { data: 'id' },
+                    { data: 'designation' },
+                    { data: 'abreviation' },
+                    { data: 'date_creation' },
+                    { data: 'actions' }
+                ]
+
+
+        });
+        
+        $('.test').click(function(){
+                $("#pdossier").DataTable().ajax.reload();
+        });
+
+    </script>  
+
+
+
+{% endblock %}

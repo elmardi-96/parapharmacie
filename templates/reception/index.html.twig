@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reception{% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+            body {
+                background-image: url({{ asset('images/back2.png') }} ) !important; 
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .login-back-left {
+                background:#ffffff00 !important;
+            }
+    </style>
+
+    {{ include ('inc/navbar.html.twig') }}   
+
+     <div class="card m-3 mt-4 shadow">
+        <div class="card-header font-weight-bold">
+            Livraison fournisseur cab
+        </div>
+        <div class="card-body">
+            <div class="home-table">
+                <!-- Table -->
+                <table id='reception' class='display dataTable table table-bordered'>
+                    <thead>
+
+                        <tr>
+                            <th>Id</th>
+                            <th>Id dossier</th>
+                            <th>Code livraison</th>
+                            <th>Date livraison</th>
+                            <th>Remise</th>
+                            <th>Date remise</th>
+                            <th>Mt remise</th>
+                            <th>Date operation</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $('#reception').DataTable({
+
+                // 'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'/reception_data/lvcab'
+                },
+                'columns': [
+                    { data: 'id' },
+                    { data: 'dossier_id' },
+                    { data: 'code_livraison' },
+                    { data: 'date_livraison' },
+                    { data: 'remise' },
+                    { data: 'date_remise' },
+                    { data: 'mt_remise' },
+                    { data: 'date_operation' },
+                    { data: 'actions' },
+                ]
+
+
+        });
+        
+        $('.test').click(function(){
+                $("#reception").DataTable().ajax.reload();
+        });
+
+    </script>  
+
+
+
+{% endblock %}

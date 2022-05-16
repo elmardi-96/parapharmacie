@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+                body {
+                    background-image: url({{ asset('images/back2.png') }} ) !important; 
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-size: cover;
+                }
+                .login-back-left {
+                    background:#ffffff00 !important;
+                }
+
+
+    </style>
+    
+    {{ include ('inc/navbar.html.twig') }}   
+     
+    <div class="row m-3 mt-5">
+    <div class="col-sm-3 ">
+        <div class="card bg-dark text-white text-center shadow">
+            <div class="card-body">
+                <div class="mb-2">
+                <img class="icon-gestion" src="{{asset('images/box.png')}}" width="100px"> </img>
+                </div>
+                Gestion Articles
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3 ">
+        <div class="card bg-dark text-white text-center shadow">
+            <div class="card-body">
+                <div class="mb-2">
+                <img class="icon-gestion" src="{{asset('images/group.png')}}" width="100px"> </img>
+                </div>
+                Gestion Users
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3 ">
+        <div class="card bg-dark text-white text-center shadow">
+            <div class="card-body">
+                <div class="mb-2">
+                <img class="icon-gestion" src="{{asset('images/consumer.png')}}" width="100px"> </img>
+                </div>
+                Gestion Clients
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3 ">
+        <div class="card bg-dark text-white text-center shadow">
+            <div class="card-body">
+                <div class="mb-2">
+                <img class="icon-gestion" src="{{asset('images/fundraiser.png')}}" width="100px"> </img>
+                </div>
+                Gestion Fournisseurs
+            </div>
+        </div>
+    </div>
+
+    
+    {# <div class="col-sm-3 mt-4">
+        <div class="card bg-dark text-white text-center shadow">
+            <div class="card-body">
+                <div class="mb-2">
+                <img class="icon-gestion" src="{{asset('images/folder.png')}}" width="100px"> </img>
+                </div>
+                Gestion Dossiers
+            </div>
+        </div>
+    </div> #}
+    
+    </div>
+        
+{% endblock %}

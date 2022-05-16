@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reception{% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+            body {
+                background-image: url({{ asset('images/back2.png') }} ) !important; 
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .login-back-left {
+                background:#ffffff00 !important;
+            }
+    </style>
+
+    {{ include ('inc/navbar.html.twig') }}   
+
+    
+
+   
+     <div class="card m-3 mt-4 shadow">
+        <div class="card-header font-weight-bold">
+            Produits
+        </div>
+        <div class="card-body">
+            <div class="home-table">
+
+                <!-- Table -->
+                <table  id='pproduit' class='display dataTable table table-bordered'>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Designation</th>
+                            <th>PrixAchat</th>
+                            <th>PrixVente</th>
+                            <th>NLot</th>
+                            <th>DateExp</th>
+                            <th>CodeBarre</th>
+                            <th>Tva</th>
+                            <th>conditionnement</th>
+                            <th>code_zone</th>
+                            <th>qte_reste</th>
+                            {# <th>actions</th> #}
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $('#pproduit').DataTable({
+
+                // 'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'/p/produit/produit_data'
+                },
+                'columns': [
+                    { data: 'id' },
+                    { data: 'designation' },
+                    { data: 'prix_achat' },
+                    { data: 'prix_vente' },
+                    { data: 'n_lot' },
+                    { data: 'date_exp' },
+                    { data: 'code_barre' },
+                    { data: 'tva' },
+                    { data: 'conditionnement' },
+                    { data: 'code_zone' },
+                    { data: 'qte_reste' },
+                ]
+
+
+        });
+        
+
+    </script>  
+
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PClient{% endblock %}
+
+{% block body %}
+    <h1>PClient</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ p_client.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ p_client.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ p_client.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ p_client.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ p_client.tel }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ p_client.email }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ p_client.dateCreation ? p_client.dateCreation|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('p_client_index') }}">back to list</a>
+
+    <a href="{{ path('p_client_edit', {'id': p_client.id}) }}">edit</a>
+
+    {{ include('p_client/_delete_form.html.twig') }}
+{% endblock %}

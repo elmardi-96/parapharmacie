@@ -1,0 +1,443 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vente{% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+
+            body {
+                background-image: url({{ asset('images/back2.png') }} ) !important; 
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .login-back-left {
+                background:#ffffff00 !important;
+            }
+            .select2-container .select2-selection--single{
+               height:36px !important;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__rendered {
+               line-height: 37px !important;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__arrow {
+               height: 37px !important;
+            }
+            .select2-container--default .select2-search--dropdown .select2-search__field {
+                    outline: none !important;
+             }
+            .error{
+                display:none;
+            }
+            .ajouter_vente,.vendre_vente{
+                display:none;
+            }
+
+    </style>
+
+    {{ include ('inc/navbar.html.twig') }}   
+
+<!-- produit avec le code barre -->
+
+ <div class="flex-container">
+    <div class="col-sm-12 col-md-8">
+        <div class="card shadow">
+            <div class="card-header">
+                <span class="font-weight-bold"> Produit à vendre </span>
+                <a class="float-right text-dark" href="{{ path('vente') }}">
+                       <i class="fas fa-arrow-left mr-1"></i>
+                        Retourner à la liste
+                </a>
+            </div>
+            
+            <div class="card-body vente_list_input">
+                 
+                
+
+                <div class="row">
+
+                     <div class="col-12 error">
+                        <div class="alert alert-danger text-center" role="alert">
+                                Ce produit n'existe pas!
+                        </div>
+                    </div>
+
+                    <!-- Code à barre -->
+                    <div class="form-group col-6">
+                        <label for="cad" class="f-14">Code à barre</label>
+                        <input type="text" class="form-control"  name="codeBarre"  id="codeBarre_vente"  placeholder="Code à barre">
+                    </div>
+
+                     <!-- Articles internes -->
+                    <div class="form-group col-6">
+                        <label for="Client"  class="f-14">Client</label>
+                        <select class="js-example-responsive" name="Client" id="Client" class="Client" style="width: 100%; outline:none;">
+                                <option value="empty">Choisir un client</option>
+                                {% for client in clients %}
+                                <option value="{{client.id}}">{{client.nom}}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- designation produit -->
+                    <div class="form-group col-6">
+                        <label for="designation" class="f-14">Designation</label>
+                        <input type="text" class="form-control" id="designation" name="p_produit[designation]" placeholder="Designation produit" readonly>
+                    </div>
+
+                    <!-- codeZone -->
+                    <div class="form-group col-6">
+                        <label for="codeZone" class="f-14">Code Zone</label>
+                        <input type="text" class="form-control"  name="p_produit[codeZone]"  id="codeZone"  placeholder="Code zone" readonly>
+                    </div>
+
+                    <!-- Qte produit -->
+                    <div class="form-group col-6" >
+                        <label for="quantite" class="f-14">Quantite</label>
+                        <input type="text" class="form-control" id="quantite"  name="p_produit[qte]" placeholder="quantite produit" >
+                    </div>
+
+                    <!-- Conditionnement -->
+                    <div class="form-group col-6">
+                        <label for="conditionnement" class="f-14">Conditionnement</label>
+                        <input type="text" class="form-control"  name="p_produit[conditionnement]"  id="conditionnement"  placeholder="Conditionnement" readonly>
+                    </div>
+
+                    <!-- Prix de vente -->
+                    <div class="form-group col-6">
+                        <label for="prixVente" class="f-14">prix de vente</label>
+                        <input type="text" class="form-control"  name="p_produit[prixVente]"  id="prixVente"  placeholder="Prix de vente" readonly>
+                    </div>
+
+                    <!--  Date d'exprition -->
+                    <div class="form-group col-6">
+                        <label for="de" class="f-14"> Date d'exprition </label>
+                        <input class="form-control" type="date"  value="" id="de" name="dateExp" readonly>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-dark  btn-fcz float-right ajouter_vente"> 
+                           <i class="fas fa-plus"></i> Ajouter
+                        </button>
+                    </div>
+
+                </div>
+               
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- fin produit avec le code barre -->
+
+
+
+<!-- produit avec le code barre -->
+
+ <div class="flex-container">
+    <div class="col-sm-12 col-md-8 m-3">
+        <div class="card shadow">
+            <div class="card-header">
+                <span class="font-weight-bold">Listes des produits à vendre </span>
+            </div>
+            
+            <div class="card-body text-center">
+                 
+                    {# <span class="text-center"> Listes des produits à vendre </span> #}
+                    <table class="table table-bordered" style="font-size:13px;">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Designation</th>
+                                <th scope="col">prixVente</th>
+                                <th scope="col">Quantite</th>
+                                <th scope="col">Code Zone</th>
+                                <th scope="col">Conditionnement</th>
+                                <th scope="col">Date d'expiration</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="list-produit">
+                               <tr>
+                                   <td colspan="8" class="pas_de_produits">
+                                       <div class="text-center"> Pas de produits </div>
+                                   </td>
+                               </tr>
+                        </tbody>
+
+                    </table>
+
+                    <button type="submit" class="btn btn-dark  btn-fcz float-right vendre_vente"> 
+                           <i class="fas fa-dollar-sign"></i> Vendre
+                    </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- fin produit avec le code barre -->
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script>
+
+       var error = false;
+       var id, designation, prixVente, qteReste, codeZone, conditionnement, de;
+       let produit = [];
+       let Allproduits = [];
+       let IdProduits = [];
+       var QteEnPanier, Qte; // qte que peut l'utilisateur saisir
+        
+        $('#codeBarre_vente').on("keypress",function(e) {
+
+            if(e.which == 13){
+                    
+                    QteEnPanier =0;
+                    Qte = 0;
+
+                    Allproduits.some(function(element, index, _arr) {
+                         IdProduits.push(element.id);
+                    });
+
+                    // get produit
+                    var codeBarre = $(this).val();
+                    var formData = new FormData();
+                    formData.append('CB',codeBarre);
+                    var json_arr = JSON.stringify(IdProduits);
+                    formData.append('IdProduits',json_arr);
+
+                    $.ajax({
+                        url  : "{{ path('vente_get_produit') }}",
+                        type : "POST",
+                        data : formData,
+                        success: function (result) {
+                             
+                            console.log(result);
+                            if(result[0] == 'DateMin'){
+                                var now = new Date(result[1].date);
+                                var dateString = moment(now).format('YYYY-MM-DD');
+                                $('.error .alert').html("Ce produit '"+result[2]+"' a une Date d'expiration " +dateString+ " inférieur à celle du produit saisie");
+                                $('.error').show('');
+                                error = true;
+
+                            }else if(result == 'null'){
+                                $('.error .alert').html("Ce produit n'existe pas!");
+                                $('.error').show('');
+                                error = true;
+
+                            }else if(result == 'vendu'){
+                                $('.error .alert').html("ce produit est vendu!");
+                                $('.error').show('');
+                                error = true;
+
+                            }else{
+                                error = false;
+                                $('.error').hide();
+
+                                Allproduits.some(function(element, index, _arr) {
+                                    if(element.id == result['id'] ){
+                                        QteEnPanier =  QteEnPanier + parseInt(element.qteReste);
+                                    }
+                                });
+
+                                //---qunatite qui reste aprés lajout au panier
+
+                                if(QteEnPanier == 0){
+                                       Qte = result['qteReste'];
+                                } else{
+                                       Qte = result['qteReste'] - QteEnPanier;
+                                }
+
+                                if(Qte == 0){
+
+                                    $('.error .alert').html("ce produit est vendu!");
+                                    $('.error').show('');
+
+                                }else{
+
+                                    $('#designation').val(result['designation']);
+                                    $('#prixVente').val(result['prixVente']);
+                                    $('#quantite').val(Qte);
+                                    $('#codeZone').val(result['codeZone']);
+                                    $('#conditionnement').val(result['conditionnement']);
+
+                                    var now = new Date(result['detExp'].date);
+                                    var dateString = moment(now).format('YYYY-MM-DD');
+                                    $('#de').val(dateString);
+                                    
+                                    id              = result['id'];
+                                    designation     = result['designation'];
+                                    prixVente       = result['prixVente'];
+                                    qteReste        = Qte;
+                                    codeZone        = result['codeZone'];
+                                    conditionnement = result['conditionnement'];
+                                    de              = dateString;
+
+                                    $('.ajouter_vente').show();
+
+                                }
+                                
+                            }
+
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });    
+            }    
+            
+        });
+
+
+        var exist = true;
+        var firstClient = true;
+
+        $('.ajouter_vente').click(function(){
+
+            if($('#quantite').val() > Qte  ){
+                $('.error .alert').html("la quantité saisie est supérieur à " + qteReste + " est la quantité en Stock!");
+                $('.error').show('');
+            } else{
+                
+                var client = $('#Client').val();
+
+                if(client == 'empty' ){
+                       $('.error .alert').html("Veuillez séléctionner un client!");
+                       $('.error').show('');
+
+                }else{
+                    
+                    if(firstClient){
+                       $('#Client').prop('disabled', 'disabled');
+                       firstClient = false ;
+                    } 
+
+                    var enPanier = false;
+                    if(error == false){
+
+                        Allproduits.some(function(element, index, _arr) {
+                                if(element.id == id) {
+                                element.qteReste = parseInt(element.qteReste) + parseInt($('#quantite').val());
+                                   enPanier = true;
+                                }
+                        });
+                        
+                        
+                        if(enPanier == false){
+
+                            var produit = {};
+                            produit['id']              = id;
+                            produit['designation']     = designation;
+                            produit['prixVente']       = prixVente;
+                            produit['qteReste']        = $('#quantite').val();
+                            produit['codeZone']        = codeZone;
+                            produit['conditionnement'] = conditionnement;
+                            produit['de']              = de;
+                            produit['client']          = client;
+
+                            Allproduits.push(produit);
+                            enPanier = false;
+
+                        }
+                        
+                        remplirTable();
+                        $('.pas_de_produits').hide();
+                        $('.vendre_vente').show();
+                        $('.error').hide('');
+                        $('.vente_list_input input').val('');
+                        error = true;
+                        $(this).hide();
+                        
+                    }
+                }
+
+            }
+
+        });
+
+        $("body").on('click','.supprimer_produit',function(){
+
+               var id = $(this).attr('id');
+
+               Allproduits.some(function(element, index, _arr) {
+                     if( element.id == id ) {
+                            Allproduits.splice(index, 1);
+                     }
+               });
+
+               if(Allproduits.length === 0){
+                        $('.vendre_vente').hide();
+               }
+
+               remplirTable();
+
+        });
+
+        function remplirTable(){
+
+               var tr = "";
+               Allproduits.some(function(element, index, _arr) {
+
+                            tr = tr + '<tr class="d-flex align-items-center">'+
+                                       '<td>'+element.id +'</td>'+
+                                       '<td>'+element.designation +'</td>'+
+                                       '<td>'+element.prixVente +'</td>'+
+                                       '<td>'+element.qteReste +'</td>'+
+                                       '<td>'+element.codeZone +'</td>'+
+                                       '<td>'+element.conditionnement +'</td>'+
+                                       '<td>'+element.de +'</td>'+
+                                       '<td class="supprimer_produit" id="'+element.id+'"><i class="fas fa-trash text-danger"></i></td>'+
+                                    '</tr>';
+                });
+                $('.list-produit').html(tr);
+        }
+
+
+        $('.vendre_vente').click(function(){
+
+                    var formData = new FormData();
+                    var json_arr = JSON.stringify(Allproduits);
+                    formData.append('Allproducts',json_arr);
+
+                    $.ajax({
+                        url  : "{{ path('vente_insert') }}",
+                        type : "POST",
+                        dataType: "JSON",
+                        data: formData,
+                        success: function (result) {
+
+                            if(result == 'ok'){
+                               alert("l'opération est faite");
+                               Allproduits = [];
+                               remplirTable();
+                               $('.vendre_vente').hide();
+                            }else{
+                                
+                            }
+
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });    
+        });
+
+
+    </script>  
+
+
+
+{% endblock %}

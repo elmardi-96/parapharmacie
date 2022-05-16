@@ -1,0 +1,14 @@
+<div class='actions'>
+
+    <a class='text-info  d-inline' href="{{ path('p_fornisseur_edit',{'id' : id}) }}">
+        <i class='fas fa-edit' ></i>
+    </a>
+
+    <form method="post" action="{{ path('p_fornisseur_delete', {'id': id}) }}" 
+          class="d-inline p-0"  onsubmit="return confirm('Vous êtes sûr ?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ id) }}">
+        <button class="btn p-0"><i class='fa fa-trash text-danger' ></i></button>
+    </form>
+
+</div>

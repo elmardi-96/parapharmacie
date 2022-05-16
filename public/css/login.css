@@ -1,0 +1,35 @@
+.flex-container {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content:center;
+}
+.form-login{
+    width:30%;
+}
+form{
+    background-color: white;
+    width:100%;
+}
+body{
+    background-color: #D2D6DE;
+    font-family: 'Poppins', sans-serif;
+}
+.authentification{
+    color: #202D49;
+}
+.btn{
+    font-size:14px;
+}
+.fcz-img{
+    width: 100%;
+}
+.test{
+    width: 17%;
+    margin: auto;
+}
+input{
+    outline: none;
+}
+
+  

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choix de dossier{% endblock %}
+{% block stylesheets %}
+   {{parent()}}
+    <link rel="stylesheet" href="{{  asset('css/login.css') }}" rel="stylesheet">
+    <style id="savepage-cssvariables">
+        {# body {
+            background-image: url({{ asset('images/logofcz.png') }} ) !important; 
+        } #}
+    </style>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="page-login flex-container">
+     
+    <div class="form-login">
+
+        <div class="test mb-4">
+             <img class="fcz-img" src="{{ asset('images/logofcz.png') }}"></img>
+        </div>
+        <form method="post" action="{{ path('home') }}" class="p-4 shadow" autocomplete="off">
+             
+             <div class="form-group">
+                <select class="form-control"   name="dossier" id="dossier" >
+                    <option value="empty" id="empty"> Veuillez choisir un dossier </option>
+                    {% for u in UserAffectation %}
+                                <option value="{{ u.dossier.id }}" id="{{ u.id }}">{{ u.dossier.nom }}</option>
+                    {% endfor %} 
+                </select>
+            </div>
+
+            <button class="btn btn-lg btn-dark mt-2 btn-block font-weight-bold choisir"  type="submit">
+                Choisir
+            </button>
+        </form>
+    </div>
+    
+
+</div>
+{% endblock %}

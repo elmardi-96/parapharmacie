@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PProduit{% endblock %}
+
+{% block body %}
+    <h1>PProduit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ p_produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ p_produit.designation }}</td>
+            </tr>
+            <tr>
+                <th>PrixAchat</th>
+                <td>{{ p_produit.prixAchat }}</td>
+            </tr>
+            <tr>
+                <th>PrixVente</th>
+                <td>{{ p_produit.PrixVente }}</td>
+            </tr>
+            <tr>
+                <th>NLot</th>
+                <td>{{ p_produit.nLot }}</td>
+            </tr>
+            <tr>
+                <th>DateExp</th>
+                <td>{{ p_produit.dateExp ? p_produit.dateExp|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CodeBarre</th>
+                <td>{{ p_produit.codeBarre }}</td>
+            </tr>
+            <tr>
+                <th>Tva</th>
+                <td>{{ p_produit.tva }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ p_produit.dateCreation ? p_produit.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('p_produit_index') }}">back to list</a>
+
+    <a href="{{ path('p_produit_edit', {'id': p_produit.id}) }}">edit</a>
+
+    {{ include('p_produit/_delete_form.html.twig') }}
+{% endblock %}

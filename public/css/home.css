@@ -1,0 +1,28 @@
+body{
+    /* background-color: #D2D6DE; */
+    font-family: 'Poppins', sans-serif;
+}
+.home-table{
+    font-size: 13px;
+}
+.breadcrumb{
+    font-size: 13px;
+}
+td:last-child{
+  text-align: center;
+}
+div.dataTables_wrapper div.dataTables_filter input{
+    border: 1px solid #ddd;
+    outline: none !important;
+}
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.btn-fcz{
+    font-size: 12px;
+}
+.f-14{
+    font-size: 14px;
+}

@@ -1,0 +1,317 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reception{% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+            body {
+                background-image: url({{ asset('images/back2.png') }} ) !important; 
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .login-back-left {
+                background:#ffffff00 !important;
+            }
+            .select2-container .select2-selection--single{
+               height:36px !important;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__rendered {
+               line-height: 37px !important;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__arrow {
+               height: 37px !important;
+            }
+            .enStock{
+                display:none;
+            }
+    </style>
+
+    {{ include ('inc/navbar.html.twig') }}   
+
+     <div class="card m-3 mt-4 shadow">
+        <div class="card-header font-weight-bold">
+            Livraison fournisseur det
+        </div>
+        <div class="card-body">
+            <div class="home-table">
+
+                <div class="alert alert-success enStock text-center" role="alert">
+                     Le produit maintenant est en Stock!
+                </div>
+                <!-- Table -->
+                <table id='reception' class='display dataTable table table-bordered'>
+                    <thead>
+                        <tr>
+                            <th>Code livraison</th>
+                            <th>Article</th>
+                            <th>Unite</th>
+                            <th>Quantite</th>
+                            <th>Prix unitaire</th>
+                            <th>Tva</th>
+                            <th>Prix ttc</th>
+                            <th>Actions</th>
+                            {# <th>dateoperation</th> #}
+                        </tr>
+
+                    </thead>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+    <input id="cabCode" type="text" value={{idCab}} hidden>
+
+    {# <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                ...
+                </div>
+            </div>
+            </div>
+    </div> #}
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="modal_ajout_produit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content ">
+
+        <form name="p_produit" method="post" action="{{ path('p_produit_new') }}" id="p_produit">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Produit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <div class="row">
+
+                    <div class="col-12 col-md-12">
+                                <!-- produit det -->
+                                <div class="card">
+                                    <h6 class="card-header bg-dark text-white">Produit</h6>
+                                    <div class="card-body">
+
+                                        <!--- row -->
+                                        <div class="row">
+
+                                             <input type="text" class="form-control" id="id_det" name="id_det"  hidden>
+                                           
+
+                                            <!-- designation produit -->
+                                            <div class="form-group col-6">
+                                                <label for="designation" class="f-14">Designation</label>
+                                                <input type="text" class="form-control" id="designation" name="p_produit[designation]" placeholder="Designation produit" readonly>
+                                            </div>
+
+                                            <!-- prix produit -->
+                                            <div class="form-group col-6">
+                                                <label for="prix" class="f-14">Prix</label>
+                                                <input type="text" class="form-control" id="prix" name="p_produit[prixAchat]" placeholder="prix produit" readonly>
+                                            </div>
+
+                                            <!-- Qte produit -->
+                                            <div class="form-group col-6" >
+                                                <label for="quantite" class="f-14">Quantite</label>
+                                                <input type="text" class="form-control" id="quantite"  name="p_produit[qte]" placeholder="quantite produit" readonly>
+                                            </div>
+                                            
+                                            <!-- TVA produit -->
+                                            <div class="form-group col-6">
+                                                <label for="tva" class="f-14">Tva</label>
+                                                <input type="text" class="form-control" id="tva" name="p_produit[tva]"  placeholder="tva produit" readonly>
+                                            </div>
+
+                                        </div>
+                                        <!--- fin row -->
+                                    </div>
+                                </div>
+                        </div>
+
+
+                        <div class="col-12 col-md-12 mt-3">
+                                <!-- article -->
+                                <div class="card" style="height:100%;">
+                                    <h6 class="card-header bg-dark text-white">Article</h6>
+                                    <div class="card-body">
+                                        <!--- row -->
+                                        <div class="row">
+                                        
+                                            <!-- Articles internes -->
+                                            <div class="form-group col-6">
+                                                <label for="articles"  class="f-14">Articles</label>
+                                                <select class="js-example-responsive" name="article" id="articles" class="articles" style="width: 100%; outline:none;">
+                                                        
+                                                        {% for art in articles %}
+                                                        <option value="{{art.id}}">{{art.designation}}</option>
+                                                        {% endfor %}
+
+
+
+                                                </select>
+                                            </div>
+
+                                            <!-- numero de lot produit -->
+                                            <div class="form-group col-6">
+                                                <label for="ndl" class="f-14">Numero de lot</label>
+                                                <input type="text" class="form-control" id="ndl"  name="p_produit[nLot]" placeholder="Numero de lot">
+                                            </div>
+
+                                            <!-- Code à barre -->
+                                            <div class="form-group col-6">
+                                                <label for="cad" class="f-14">Code à barre</label>
+                                                <input type="text" class="form-control"  name="p_produit[codeBarre]"  id="cad"  placeholder="Code à barre">
+                                            </div>
+
+                                            <!-- Conditionnement -->
+                                            <div class="form-group col-6">
+                                                <label for="conditionnement" class="f-14">Conditionnement</label>
+                                                <input type="text" class="form-control"  name="p_produit[conditionnement]"  id="conditionnement"  placeholder="Conditionnement">
+                                            </div>
+
+                                            <!-- codeZone -->
+                                            <div class="form-group col-6">
+                                                <label for="codeZone" class="f-14">Code Zone</label>
+                                                <input type="text" class="form-control"  name="p_produit[codeZone]"  id="codeZone"  placeholder="Code zone">
+                                            </div>
+
+                                            <!-- Prix de vente -->
+                                            <div class="form-group col-6">
+                                                <label for="prixVente" class="f-14">prix de vente</label>
+                                                <input type="text" class="form-control"  name="p_produit[prixVente]"  id="prixVente"  placeholder="Prix de vente">
+                                            </div>
+
+                                            <!--  Date d'exprition -->
+                                            <div class="form-group col-6">
+                                                <label for="de" class="f-14"> Date d'exprition </label>
+                                                <input class="form-control" type="date"  id="de" name="dateExp">
+                                            </div>
+
+                                        </div>
+                                        <!--- fin row -->
+
+
+
+                                    </div>
+                                </div>
+                        </div>
+                        
+                    </div>
+                    <input type="hidden" id="p_produit__token" name="p_produit[_token]" value="{{ csrf_token('p_produit') }}">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-fcz" data-dismiss="modal"><i class="fas fa-times mr-1"></i> Fermer</button>
+                <button type="submit" class="btn btn-dark  btn-fcz modal_produit_enregistrer"> <i class="fas fa-save mr-1"></i> Enregistrer</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+    
+
+    
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        
+        var cabCode = $('#cabCode').val();
+
+        $('#reception').DataTable({
+
+                // 'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'/reception_data/lvdet?code='+cabCode
+                },
+                'columns': [
+                    { data: 'code_livraison' },
+                    { data: 'article' },
+                    { data: 'unite' },
+                    { data: 'quantite' },
+                    { data: 'pri_unitaire' },
+                    { data: 'tva' },
+                    { data: 'prix_ttc' },
+                    { data: 'actions' },
+                    //{ data: 'dateoperation' },
+                ]
+        });
+        
+        $('.test').click(function(){
+                $("#reception").DataTable().ajax.reload();
+        });
+
+
+
+        $("body").on('click','.enregistrer-produit',function(){
+
+                    // get produit
+                    var id = $(this).attr('id');
+                    var formData = new FormData();
+                    formData.append('id', id);
+                    $('.modal_produit_enregistrer').hide();
+                    $('#p_produit .form-control').val('');
+                    
+                    $.ajax({
+                        url  : "{{ path('get_aticle') }}",
+                        type : "POST",
+                        data : formData,
+                        success: function (result) {
+                            $('#id_det').val(result['id_det']);
+                            $('#designation').val(result['designation']);
+                            $('#prix').val(result['prixAchat']);
+                            $('#quantite').val(result['quantite']);
+                            $('#tva').val(result['tva']);
+                            $('.modal_produit_enregistrer').show();
+
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });        
+        });
+
+
+        $("body").on("submit","form[name='p_produit']",function(ev) {
+                ev.preventDefault(); // Prevent browser default submit.
+                var formData = new FormData(this);
+                $.ajax({
+                    url:  "{{ path('p_produit_new') }}",
+                    type: "POST",
+                    data: formData,
+                    success: function (result) {
+
+                        if(result == 'ok'){
+                            $('#p_produit .form-control').val('');
+                            $('#modal_ajout_produit').modal('hide');
+                            $('.enStock').fadeIn();
+                            $('.enStock').delay(4000).fadeOut();
+                            $("#reception").DataTable().ajax.reload();
+                            console.log('success');
+                        }else{
+                            console.log('error');
+                           
+                        }
+
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });        
+            });
+
+        
+
+    </script>  
+
+
+
+{% endblock %}

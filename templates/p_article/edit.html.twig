@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PArticle{% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+        body {
+            background-image: url({{ asset('images/back2.png') }} ) !important; 
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .login-back-left {
+            background:#ffffff00 !important;
+        }
+
+
+    </style>
+    {{ include ('inc/navbar.html.twig') }}
+
+    {# <h1>Edit PArticle</h1> #}
+
+    {{ include('p_article/_form.html.twig', {'button_label': 'Modifier', 'card_header' : 'Modifier article'}) }}
+
+    {# <a href="{{ path('p_article_index') }}">back to list</a> #}
+
+    {# {{ include('p_article/_delete_form.html.twig') }} #}
+{% endblock %}

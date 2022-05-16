@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Synchronisation {% endblock %}
+
+{% block body %}
+
+    <style id="savepage-cssvariables">
+            body {
+                background-image: url({{ asset('images/back2.png') }} ) !important; 
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .login-back-left {
+                background:#ffffff00 !important;
+            }
+            .breadcrumb {
+                font-size: 13px;
+                margin: 0px;
+            }
+            .icon-valide,.icon-invalide,.loader{
+                    display :none;
+            }
+            .loader {
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #3498db;
+                width: 95px;
+                height: 95px;
+                -webkit-animation: spin 2s linear infinite; /* Safari */
+                animation: spin 2s linear infinite;
+                margin : 0 auto;
+            }
+
+            /* Safari */
+            @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+            }
+
+            @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            }
+    </style>
+
+    {{ include ('inc/navbar.html.twig') }} 
+    {# <div class="loading-progress"></div> #}
+    {# <div class="loader"></div> #}
+    {# <div> text </div> #}
+
+    
+    <div style="height:75vh; width:100%;  display:flex; justify-content:center; align-items:center;">
+            <div class="card bg-dark text-white text-center shadow synchroniser-card" style="width:400px; position:absolute; l" >
+                <div class="card-body">
+                    <div class="mb-2" >
+                        <img class="icon-sync" src="{{asset('images/sync.png')}}"     width="100px"> </img>
+                        <img class="icon-valide" src="{{asset('images/check.png')}}"  width="100px"> </img>
+                        <img class="icon-invalide" src="{{asset('images/cancel.png')}}" width="100px"> </img>
+                        <div class="loader"></div>
+                    </div>
+                    <div> Synchroniser </div> 
+                </div>
+            </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+     $('.synchroniser-card').click(function(){
+                $('.icon-sync').hide();
+                $('.loader').fadeIn();
+                $.ajax({
+                    type:'POST',
+                    url:"{{ path('synchroniser_data') }}",
+                    success:function(html){
+                            $('.icon-valide').fadeIn();
+                            $('.icon-sync').hide();
+                            $('.loader').hide();
+                    },
+                    error:function(html){
+                            $('.icon-invalide').fadeIn();
+                            $('.icon-sync').hide();
+                            $('.loader').hide();
+                            
+                    }
+
+                });
+     });
+
+    </script>  
+
+
+
+{% endblock %}

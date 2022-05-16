@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PFornisseur index{% endblock %}
+
+{% block body %}
+    <style id="savepage-cssvariables">
+        body {
+            background-image: url({{ asset('images/back2.png') }} ) !important; 
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .login-back-left {
+            background:#ffffff00 !important;
+        }
+    </style>
+    
+    {{ include ('inc/navbar.html.twig') }} 
+
+    {# <h1>PFornisseur index</h1> #}
+
+
+
+
+
+
+        
+    <div class="card m-3 mt-4 shadow">
+        <div class="card-header font-weight-bold">
+            Fournisseurs
+            <a class="btn btn-dark float-right  btn-sm" href="{{ path('p_fornisseur_new') }}"> 
+                <i class="fas fa-plus mr-1" ></i>
+                    Ajouter fournisseur
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="home-table">
+                <!-- Table -->
+                   <table  id='pfornisseur' class='display dataTable table table-bordered'>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Adresse</th>
+                                <th>Tel</th>
+                                <th>Email</th>
+                                <th>DateCreation</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                </table>
+                </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $('#pfornisseur').DataTable({
+
+                // 'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'/p/fornisseur/fornisseur_data'
+                },
+                'columns': [
+                    { data: 'id' },
+                    { data: 'nom' },
+                    { data: 'prenom' },
+                    { data: 'adresse' },
+                    { data: 'tel' },
+                    { data: 'email' },
+                    { data: 'date_creation' },
+                    { data: 'actions' },
+                ]
+
+
+        });
+        
+        $('.test').click(function(){
+                $("#pdossier").DataTable().ajax.reload();
+        });
+
+    </script>  
+
+
+
+{% endblock %}
+

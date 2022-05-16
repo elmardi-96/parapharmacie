@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PClient{% endblock %}
+
+{% block body %}
+    <style id="savepage-cssvariables">
+                body {
+                    background-image: url({{ asset('images/back2.png') }} ) !important; 
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-size: cover;
+                }
+                .login-back-left {
+                    background:#ffffff00 !important;
+                }
+
+
+    </style>
+    {{ include ('inc/navbar.html.twig') }}
+    {# <h1>Create new PClient</h1> #}
+
+    
+
+    {{ include('p_client/_form.html.twig', {'button_label': 'Ajouter'}) }}
+
+    
+{% endblock %}
