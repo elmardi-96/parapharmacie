@@ -66,8 +66,8 @@ class ReceptionController extends AbstractController
           ## Total number of records without filtering
           $sel=" select count(*) as allcount from vlivraisoncab where dossier_id = " . $session->get('id_dossier_local')  ;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+          $reciption=$stmt->executeQuery();
+          $result = $reciption->fetch();
           $totalRecords = $result['allcount'];
 
         //   dd($totalRecords);
@@ -76,8 +76,8 @@ class ReceptionController extends AbstractController
           ## Total number of records with filtering
           $sel=" select count(*) as allcount from vlivraisoncab WHERE 1 and dossier_id = " . $session->get('id_dossier_local') .' '.$searchQuery;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+          $reciption=$stmt->executeQuery();
+          $result = $reciption->fetch();
           $totalRecordwithFilter = $result['allcount'] ;
          
   
@@ -85,8 +85,8 @@ class ReceptionController extends AbstractController
           $sel="select * from vlivraisoncab WHERE 1 and dossier_id = " . $session->get('id_dossier_local') .' '.$searchQuery." order by ".$columnName
                 ." ".$columnSortOrder." limit ".$row.",".$rowperpage;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $empRecords = $stmt->fetchAll();
+          $reciption=$stmt->executeQuery();
+          $empRecords = $reciption->fetchAll();
         
           
         
@@ -186,8 +186,8 @@ class ReceptionController extends AbstractController
                   WHERE 1 and produit.id is null and code_livraison = '" . $idCab."'" ;
           // dd($sel);
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+          $reciptiondet=$stmt->executeQuery();
+          $result = $reciptiondet->fetch();
           $totalRecords = $result['allcount'];
 
         //   dd($totalRecords);
@@ -203,8 +203,8 @@ class ReceptionController extends AbstractController
           // if(!empty($searchValue))
           // dd($sel);
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+          $reciptiondet=$stmt->executeQuery();
+          $result =$reciptiondet->fetch();
           $totalRecordwithFilter = $result['allcount'] ;
 
         //   dd($totalRecordwithFilter);
@@ -218,8 +218,8 @@ class ReceptionController extends AbstractController
                  left join pproduit as produit on produit.livraisondet_id = det.id
                  WHERE 1  and produit.id is null and code_livraison = '" . $idCab ."' ".$searchQuery." order by ".$columnName  ." ".$columnSortOrder." limit ".$row.",".$rowperpage;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $empRecords = $stmt->fetchAll();
+          $reciptiondet=$stmt->executeQuery();
+          $empRecords = $reciptiondet->fetchAll();
         
         //   dd($empRecords);
         
