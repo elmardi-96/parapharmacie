@@ -155,8 +155,10 @@ class PArticleController extends AbstractController
           ## Total number of records without filtering
           $sel="select count(*) as allcount from particle where dossier_id = " . $session->get('id_dossier_local');
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+        //   $stmt->execute();
+         $art=$stmt->executeQuery();
+        //   $result = $stmt->fetch();
+          $result = $art->fetch();
           $totalRecords = $result['allcount'];
 
         //   dd($totalRecords);
@@ -166,8 +168,8 @@ class PArticleController extends AbstractController
           $sel="select count(*) as allcount from particle 
                 WHERE 1 and dossier_id = " . $session->get('id_dossier_local') . " " .$searchQuery;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+         $art=$stmt->executeQuery();
+           $result = $art->fetch();
           $totalRecordwithFilter = $result['allcount'] ;
          
   
@@ -176,8 +178,8 @@ class PArticleController extends AbstractController
                 WHERE 1 and dossier_id = " . $session->get('id_dossier_local') . " ".$searchQuery." order by ".$columnName
                 ." ".$columnSortOrder." limit ".$row.",".$rowperpage;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $empRecords = $stmt->fetchAll();
+         $art=$stmt->executeQuery();
+          $empRecords = $art->fetchAll();
         
           
         

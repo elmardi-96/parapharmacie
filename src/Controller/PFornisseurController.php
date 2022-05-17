@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 /**
@@ -142,8 +143,8 @@ class PFornisseurController extends AbstractController
           ## Total number of records without filtering
           $sel="select count(*) as allcount from pfornisseur";
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+          $pfournisseur=$stmt->executeQuery();
+          $result =$pfournisseur->fetch();
           $totalRecords = $result['allcount'];
 
         //   dd($totalRecords);
@@ -152,8 +153,8 @@ class PFornisseurController extends AbstractController
           ## Total number of records with filtering
           $sel="select count(*) as allcount from pfornisseur WHERE 1 ".$searchQuery;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+          $pfournisseur=$stmt->executeQuery();
+          $result = $pfournisseur->fetch();
           $totalRecordwithFilter = $result['allcount'] ;
          
   
@@ -161,8 +162,8 @@ class PFornisseurController extends AbstractController
           $sel="select * from pfornisseur WHERE 1 ".$searchQuery." order by ".$columnName
                 ." ".$columnSortOrder." limit ".$row.",".$rowperpage;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $empRecords = $stmt->fetchAll();
+          $pfournisseur=$stmt->executeQuery();
+          $empRecords = $pfournisseur->fetchAll();
         
           
         

@@ -163,8 +163,9 @@ class PClientController extends AbstractController
           $sel=" select count(*) as allcount from pclient 
                  where dossier_id = " . $session->get('id_dossier_local') ;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+        //   $stmt->execute(); 
+          $test=$stmt->executeQuery();
+          $result = $test->fetch();
           $totalRecords = $result['allcount'];
 
         //   dd($totalRecords);
@@ -174,8 +175,9 @@ class PClientController extends AbstractController
           $sel="  select count(*) as allcount from pclient WHERE 1 
                   and dossier_id = " . $session->get('id_dossier_local') . " ".$searchQuery;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+        //   $stmt->execute();
+          $test=$stmt->executeQuery();
+          $result = $test->fetch();
           $totalRecordwithFilter = $result['allcount'] ;
          
   
@@ -184,8 +186,8 @@ class PClientController extends AbstractController
                  WHERE 1 and dossier_id = " . $session->get('id_dossier_local') 
                  . " ".$searchQuery." order by ".$columnName ." ".$columnSortOrder." limit ".$row.",".$rowperpage;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $empRecords = $stmt->fetchAll();
+          $test=$stmt->executeQuery();
+          $empRecords = $test->fetchAll();
         
           
         

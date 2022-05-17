@@ -23,6 +23,7 @@ class DefaultController extends AbstractController
         // $this->getUser()->getId();
         $userId   = $this->getUser()->getId() ;
         $UserAffectation = $this->getDoctrine()->getRepository(UserAffectation::class)->findByuser($userId);
+        
         return $this->render('default/index.html.twig', [
                 'UserAffectation'=> $UserAffectation
         ]);

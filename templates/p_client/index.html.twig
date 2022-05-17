@@ -41,7 +41,21 @@
                             <th>actions</th>
                         </tr>
                     </thead>
-                    
+                    {# <tbody>
+                    {% for pc in p_clients %}
+                        <tr>
+                            <td>{{pc.id}}</td>
+                            <td>{{pc.nom}}</td>
+                            <td>{{pc.prenom}}</td>
+                            <td>{{pc.adresse}}</td>
+                            <td>{{pc.tel}}</td>
+                            <td>{{pc.email}}</td>
+                            <td>{{pc.dateCreation | date('Y-m-d') }}</td>
+                            <td></td>
+                           
+                        </tr>
+                    {% endfor %}
+                    </tbody> #}
                 </table>
             </div>
         </div>
@@ -63,6 +77,7 @@
                 'ajax': {
                     'url':'/p/client/client_data'
                 },
+                
                 'columns': [
                     { data: 'id' },
                     { data: 'nom' },

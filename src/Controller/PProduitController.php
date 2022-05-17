@@ -219,8 +219,9 @@ class PProduitController extends AbstractController
           ## Total number of records without filtering
           $sel=" select count(*) as allcount from pproduit where dossier_id = " . $session->get('id_dossier_local')  ;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+        //   $stmt->execute();
+          $pproduit=$stmt->executeQuery();
+          $result = $pproduit->fetch();
           $totalRecords = $result['allcount'];
 
         //   dd($totalRecords);
@@ -229,8 +230,8 @@ class PProduitController extends AbstractController
           ## Total number of records with filtering
           $sel=" select count(*) as allcount from pproduit WHERE 1 and dossier_id = " . $session->get('id_dossier_local') .' '.$searchQuery;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $result = $stmt->fetch();
+          $pproduit=$stmt->executeQuery();
+          $result = $pproduit->fetch();
           $totalRecordwithFilter = $result['allcount'] ;
          
   
@@ -238,8 +239,8 @@ class PProduitController extends AbstractController
           $sel="select * from pproduit WHERE 1 and dossier_id = " . $session->get('id_dossier_local') .' '.$searchQuery." order by ".$columnName
                 ." ".$columnSortOrder." limit ".$row.",".$rowperpage;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
-          $stmt->execute();
-          $empRecords = $stmt->fetchAll();
+          $pproduit=$stmt->executeQuery();
+          $empRecords = $pproduit->fetchAll();
         
           
         
