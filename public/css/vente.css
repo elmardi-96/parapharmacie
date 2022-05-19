@@ -1,0 +1,10 @@
+/* .box {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+} */
+.card-img-top {
+    width: 100% !important;
+    height: 15vw;
+    object-fit: cover;
+}

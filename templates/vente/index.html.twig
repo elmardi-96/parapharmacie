@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Vente{% endblock %}
+{% block stylsheet %}
 
+ <link rel="stylesheet"  href="{{ asset('css/vente.css') }}" >
+{% endblock %}
 {% block body %}
 
     <style id="savepage-cssvariables">
@@ -12,7 +15,9 @@
                 background-repeat: no-repeat;
                 background-attachment: fixed;
                 background-size: cover;
+        
             }
+     
             .login-back-left {
                 background:#ffffff00 !important;
             }
@@ -35,14 +40,119 @@
                 display:none;
             }
 
+    
     </style>
 
     {{ include ('inc/navbar.html.twig') }}   
+<!--Products Category  -->
+<div class="container-fluid " >
+<section >
+<div class="row " >
+ <div class="col-sm-6  col-md-4 col-lg-2  " >
 
+     <div class="box" >
+<div class="card  " >
+  <div class="card-header">
+  Catégories
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"> <a href="#" class="btn btn-dark">C.alimentaires</a>  </li>
+    <li class="list-group-item"><a href="#" class="btn btn-dark">C.alimentaires</a></li>
+    <li class="list-group-item"><a href="#" class="btn btn-dark">C.alimentaires</a></li>
+      <li class="list-group-item"><a href="#" class="btn btn-dark">C.alimentaires</a></li>
+       <li class="list-group-item"><a href="#" class="btn btn-dark">C.alimentaires</a></li>
+        <li class="list-group-item"><a href="#" class="btn btn-dark">C.alimentaires</a></li>
+         <li class="list-group-item"><a href="#" class="btn btn-dark">C.alimentaires</a></li>
+  </ul>
+</div>
+</div>
+</div>
+<!--end Products Category  -->
+<!--Products description  -->
+  <div class="col-sm-6  col-md-4 col-lg-4  ">
+    <div class="box">
+ <div class="row  ">
+ <div class="col-sm-3 col-lg-3 h-75 ">
+<div class="card " >
+  <img src="/images/gel.jpg" class="card-img-top " alt="...">
+  <div class="card-body">
+    <h6 class="card-title">nom Article</h6>
+    <p>prix</p>
+  </div>
+    </div>
+     </div>
+      <div class="col-sm-3 col-lg-3 h-75 ">
+<div class="card" >
+  <img src="/images/gel.jpg" class="card-img-top " alt="...">
+  <div class="card-body">
+    <h6 class="card-title">nom Article</h6>
+    <p>prix</p>
+  </div>
+    </div>
+     </div>
+      <div class="col-sm-3 col-lg-3  ">
+<div class="card" >
+  <img src="/images/gel.jpg" class="card-img-top " alt="...">
+  <div class="card-body">
+    <h6 class="card-title">nom Article</h6>
+    <p>prix</p>
+  </div>
+    </div>
+     </div>
+      <div class="col-sm-3 col-lg-3 h-75 ">
+<div class="card" >
+  <img src="/images/gel.jpg" class="card-img-top " alt="...">
+  <div class="card-body">
+    <h6 class="card-title">nom Article</h6>
+    <p>prix</p>
+  </div>
+    </div>
+     </div>
+      <div class="col-sm-3 col-lg-3 mt-3 h-75">
+<div class="card" >
+  <img src="/images/gel.jpg" class="card-img-top " alt="...">
+  <div class="card-body">
+    <h6 class="card-title">nom Article</h6>
+    <p>prix</p>
+  </div>
+    </div>
+     </div>
+      <div class="col-sm-3 col-lg-3 mt-3 h-75">
+<div class="card" >
+  <img src="/images/gel.jpg" class="card-img-top " alt="...">
+  <div class="card-body">
+    <h6 class="card-title">nom Article</h6>
+    <p>prix</p>
+  </div>
+    </div>
+     </div>
+      <div class="col-sm-3 col-lg-3 mt-3 h-75">
+<div class="card" >
+  <img src="/images/gel.jpg" class="card-img-top " alt="...">
+  <div class="card-body">
+    <h6 class="card-title">nom Article</h6>
+    <p>prix</p>
+  </div>
+    </div>
+     </div>
+      <div class="col-sm-3 col-lg-3 mt-3 h-75">
+<div class="card" >
+  <img src="/images/gel.jpg" class="card-img-top " alt="Responsive image">
+  <div class="card-body">
+    <h6 class="card-title">nom Article</h6>
+    <p>prix</p>
+  </div>
+    </div>
+     </div>
+ </div>
+</div>
+</div>
+<!--end Products description  -->
 <!-- produit avec le code barre -->
 
- <div class="flex-container">
-    <div class="col-sm-12 col-md-8">
+
+     <div class="col-sm-6  col-md-4 col-lg-3  ">
+     <div class="box">
         <div class="card shadow">
             <div class="card-header">
                 <span class="font-weight-bold"> Produit à vendre </span>
@@ -130,15 +240,16 @@
 
         </div>
     </div>
-</div>
+  </div>
 <!-- fin produit avec le code barre -->
 
 
 
 <!-- produit avec le code barre -->
 
- <div class="flex-container">
-    <div class="col-sm-12 col-md-8 m-3">
+
+ <div class="col-sm-6  col-md-4 col-lg-3  ">
+   <div class="box">
         <div class="card shadow">
             <div class="card-header">
                 <span class="font-weight-bold">Listes des produits à vendre </span>
@@ -151,13 +262,13 @@
 
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Designation</th>
-                                <th scope="col">prixVente</th>
+                                {# <th scope="col">ID</th> #}
+                                <th scope="col">Produit</th>
+                                <th scope="col">prix</th>
                                 <th scope="col">Quantite</th>
-                                <th scope="col">Code Zone</th>
+                                {# <th scope="col">Code Zone</th>
                                 <th scope="col">Conditionnement</th>
-                                <th scope="col">Date d'expiration</th>
+                                <th scope="col">Date d'expiration</th> #}
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -172,6 +283,15 @@
 
                     </table>
 
+<tfoot>
+<tr>
+    <td colspan="2" class="text-left">total:</td>
+    {# <td></td>
+    <td></td> #}
+    <td></td>
+</tr>
+</tfoot>
+
                     <button type="submit" class="btn btn-dark  btn-fcz float-right vendre_vente"> 
                            <i class="fas fa-dollar-sign"></i> Vendre
                     </button>
@@ -179,12 +299,33 @@
             </div>
 
         </div>
+       
+       
+<div class="card mt-3" >
+ 
+  <div class="card-body">
+    <h5 class="card-title">Montent à retourné</h5>
+    <h6>card content</h6>
+  
+  </div>
+</div>
+       
+<div class="card mt-3" >
+ 
+  <div class="card-body">
+    <h5 class="card-title">Calculator</h5>
+    <h6>card content</h6>
+  
+  </div>
+</div>
     </div>
+
+    <div>
 </div>
 <!-- fin produit avec le code barre -->
 
-
-
+</div>
+</section>
 {% endblock %}
 
 {% block javascripts %}
@@ -271,20 +412,20 @@
                                     $('#designation').val(result['designation']);
                                     $('#prixVente').val(result['prixVente']);
                                     $('#quantite').val(Qte);
-                                    $('#codeZone').val(result['codeZone']);
+                                    {# $('#codeZone').val(result['codeZone']);
                                     $('#conditionnement').val(result['conditionnement']);
 
                                     var now = new Date(result['detExp'].date);
                                     var dateString = moment(now).format('YYYY-MM-DD');
-                                    $('#de').val(dateString);
+                                    $('#de').val(dateString); #}
                                     
-                                    id              = result['id'];
+                                    {# id              = result['id']; #}
                                     designation     = result['designation'];
                                     prixVente       = result['prixVente'];
                                     qteReste        = Qte;
-                                    codeZone        = result['codeZone'];
+                                    {# codeZone        = result['codeZone'];
                                     conditionnement = result['conditionnement'];
-                                    de              = dateString;
+                                    de              = dateString; #}
 
                                     $('.ajouter_vente').show();
 
@@ -339,7 +480,7 @@
                         if(enPanier == false){
 
                             var produit = {};
-                            produit['id']              = id;
+                            {# produit['id']              = id; #}
                             produit['designation']     = designation;
                             produit['prixVente']       = prixVente;
                             produit['qteReste']        = $('#quantite').val();
@@ -392,13 +533,13 @@
                Allproduits.some(function(element, index, _arr) {
 
                             tr = tr + '<tr class=" align-items-center">'+
-                                       '<td>'+element.id +'</td>'+
+                                       {# '<td>'+element.id +'</td>'+ #}
                                        '<td>'+element.designation +'</td>'+
                                        '<td>'+element.prixVente +'</td>'+
                                        '<td>'+element.qteReste +'</td>'+
-                                       '<td>'+element.codeZone +'</td>'+
+                                       {# '<td>'+element.codeZone +'</td>'+
                                        '<td>'+element.conditionnement +'</td>'+
-                                       '<td>'+element.de +'</td>'+
+                                       '<td>'+element.de +'</td>'+ #}
                                        '<td class="supprimer_produit" id="'+element.id+'"><i class="fas fa-trash text-danger"></i></td>'+
                                     '</tr>';
                 });
