@@ -3,11 +3,30 @@
 {% block title %}PClient{% endblock %}
 
 {% block body %}
-    <h1>PClient</h1>
 
-    <table class="table">
+    <h3 class="mt-3 mb-3 text-center">PClient</h3>
+ {# <div class="card text-start|center|end mt-5">
+		<div class="card" style="width: 80%;">
+
+			<div class="card-body">
+				 <ul class="list-group list-group-flush">
+                 <li class="list-group-item">ID: {{p_client.id}}</li>
+				<li class="list-group-item">Nom: {{p_client.nom}}</li>
+				<li class="list-group-item">Prénom: {{p_client.prenom}}</li>
+				<li class="list-group-item">Adresse: {{p_client.adresse}}</li>
+				<li class="list-group-item">Télephone: {{p_client.tel}}</li>
+				<li class="list-group-item">Email: {{p_client.email}}</li>
+				<li class="list-group-item">Date de Création: {{p_client.dateCreation ? p_client.dateCreation|date('Y-m-d') : '' }}</li>
+
+			</ul>
+
+			</div>
+		</div>
+	</div> #}
+  
+    <table class="table table-bordered ms-5 me-5">
         <tbody>
-            <tr>
+            <tr >
                 <th>Id</th>
                 <td>{{ p_client.id }}</td>
             </tr>
@@ -37,6 +56,10 @@
             </tr>
         </tbody>
     </table>
+  
+
+
+
 
     <a href="{{ path('p_client_index') }}">back to list</a>
 

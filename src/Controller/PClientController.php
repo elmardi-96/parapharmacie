@@ -166,6 +166,7 @@ class PClientController extends AbstractController
         //   $stmt->execute(); 
           $test=$stmt->executeQuery();
           $result = $test->fetch();
+        //   $result = $stmt->fetch();
           $totalRecords = $result['allcount'];
 
         //   dd($totalRecords);
@@ -187,8 +188,9 @@ class PClientController extends AbstractController
                  . " ".$searchQuery." order by ".$columnName ." ".$columnSortOrder." limit ".$row.",".$rowperpage;
           $stmt = $this->getDoctrine()->getConnection()->prepare($sel);
           $test=$stmt->executeQuery();
+        //  $stmt->execute();
           $empRecords = $test->fetchAll();
-        
+        //  $empRecords = $stmt->fetchAll();
           
         
           
